@@ -1,4 +1,4 @@
-# nPose-Animesh-Plugin
+# nPose-Animesh-Plugin (ALPHA)
 Animesh objects are made with the same type of skeletal structure as Avatars and thus we can animate them with the same animation files used to animate Avatars.
 
 There are several areas we can animate separately (bento).  These areas are:
