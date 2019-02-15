@@ -1,4 +1,4 @@
-# nPose-Animesh-Plugin (ALPHA)
+# nPose-Animesh-Plugin (BETA)
 Animesh objects are made with the same type of skeletal structure as Avatars and thus we can animate them with the same animation files used to animate Avatars.
 
 There are several areas we can animate separately (bento).  These areas are:
@@ -12,10 +12,10 @@ The nPose Animesh Plugin can target each of these areas separately with a single
 
 There are two separate overrides within this system to set up animations.  
 The first being to run a single animation:        
-    `LINKMSG|-14002|animeshName~areaToAnimate~animationName`
+    `LINKMSG|-14002|animeshName|areaToAnimate|animationName|position vector|rotation vector`
     
 The second being to provide a list of animations to run on one of the areas:        
-    `LINKMSG|-14002|animeshName~randomMode~timeForEachAnimation~commaSeparatedListOfAnimations`
+    `LINKMSG|-14002|animeshName|randomMode|timeForEachAnimation|commaSeparatedListOfAnimations|position vector|rotation vector`
     
 When the nPose Animesh Pluin receives a new body animation request, it will reset any timers which could be running for the list of animations.  It will not stop any current animation automatically.  If you wish to run another list of animations, you'll have to set that up again for this animesh pose.
 
@@ -23,7 +23,7 @@ When the nPose Animesh Pluin receives a new body animation request, it will rese
     
 There is also an override to allow you to move an animesh.  This is for rezzed animesh, not attached.  The move uses the rezzor's position and rotation as the reference (just like normal props use).
 The syntax for this override is as follows:        
-    `LINKMSG|-14003|animeshName~<positionVector>~<rotationVector>`
+    `LINKMSG|-14003|animeshName|<positionVector>|<rotationVector>`
     
     
     
@@ -36,7 +36,7 @@ Rez the dummy as explicit so ANIM lines don't derez the dummy
     `PROP|Bento_test_dummy_rezzed|<0.00000, 2.63785, 0.508057>|<0.00000, 0.00000, 0.00000>|explicit|quiet`
 
 Set the initial pose for the animesh        
-    `LINKMSG|-14002|Bento_test_dummy_rezzed~body~npose-listen right`
+    `LINKMSG|-14002|Bento_test_dummy_rezzed|body|npose-listen right|<0.00000, 2.63785, 0.508057>|<0.00000, 0.00000, 0.00000>`
 
 The animesh will report any new positions like a prop would except it's in an easy copy format for the animesh lines.  Reporting is turned off by default.        
     `LINKMSG|-14002|report`
@@ -45,11 +45,10 @@ The animesh will report any new positions like a prop would except it's in an ea
 You can now set up notecards to animate the animesh areas as well as setup your AV animations just like an normal nPose setup.  Just include the lines to do what's needed with the animesh prop in that same card.  An example might be as follows:        
 
     `SCHMO|1|npose-listen forward|<0.694916, 0.685030, 0.214600>|<0.000000, 0.000000, -135.001892>|`        
-    `LINKMSG|-14002|Bento_test_dummy_rezzed~body~npose-storyteller`        
-    `LINKMSG|-14003|Bento_test_dummy_rezzed~<-0.672264, -0.748333, 0.508057>~<0.000000, 0.000000, 45.000030>`        
-    `LINKMSG|-14002|Bento_test_dummy_rezzed~hand~HandLPoint01 P4`        
-    `LINKMSG|-14002|Bento_test_dummy_rezzed~hand~HandRPoint01 P4`        
-    `LINKMSG|-14002|Bento_test_dummy_rezzed~tail~1~5~Tail-1,Tail-2,Tail-3,Tail-4`        
+    `LINKMSG|-14002|Bento_test_dummy_rezzed~body|npose-storyteller|<-0.672264, -0.748333, 0.508057>|<0.000000, 0.000000, 45.000030>`        
+    `LINKMSG|-14002|Bento_test_dummy_rezzed~hand|HandLPoint01 P4`        
+    `LINKMSG|-14002|Bento_test_dummy_rezzed~hand|HandRPoint01 P4`        
+    `LINKMSG|-14002|Bento_test_dummy_rezzed~tail|1|5|Tail-1,Tail-2,Tail-3,Tail-4`        
     
 
 Here we use the SCHMO line to move and animate the AV.
