@@ -321,7 +321,6 @@ default {
                 else {
                     Anims = llCSV2List(llList2String(Parts, 4));
                 }
-                llOwnerSay("Target group: " + TargetGroup + "\nMode: " + llList2String(Parts, 2) + "\nRun time: " + llList2String(Parts, 3));
                 //TimerList = [remaining time, mode, requested run time, AnimsIndex, target group]
                 TimerList += [
                     llGetTime() + llList2Integer(Parts, 2),
