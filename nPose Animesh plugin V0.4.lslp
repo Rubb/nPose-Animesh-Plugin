@@ -446,7 +446,13 @@ default {
                 llMoveToTarget(objPos, 0.2);
                 llRotLookAt(getRotToPointAxisAt(<1.0,0.0,0.0>, AvPos), 0.4, 0.1);
                 stop_all_animations();
-                llMessageLinked(LINK_SET, 200, WalkingAnims, "");
+                AVstatus = llGetAnimation(AV_To_Follow);
+                if (AVstatus == "Hovering" && !SFlagHovering) {
+                    llMessageLinked(LINK_SET, 200, FlyingAnims, "");
+                }
+                else {
+                    llMessageLinked(LINK_SET, 200, WalkingAnims, "");
+                }
             }
         }
     }
@@ -486,7 +492,7 @@ default {
                     llSetStatus(STATUS_PHYSICS, FALSE);
                 }
             }
-            if (followFlag && AVstatus == "Walking" && !SFlagWalking) {
+            if (AVstatus == "Walking" && !SFlagWalking) {
                 llSensorRemove();
                 llSetStatus(STATUS_PHYSICS, FALSE);
                 llMessageLinked(LINK_SET, 200, WalkingAnims, "");
@@ -499,7 +505,7 @@ default {
                 SFlagHovering = 0;
                 SFlagRunning = 0;
             }
-            else if (followFlag && (AVstatus == "Sitting") && !SFlagSitting) {
+            else if (AVstatus == "Sitting" && !SFlagSitting) {
                 llSensorRemove();
                 llSetStatus(STATUS_PHYSICS, FALSE);
                 llMessageLinked(LINK_SET, 200, SittingAnims, "");
@@ -512,7 +518,7 @@ default {
                 SFlagHovering = 0;
                 SFlagRunning = 0;
             }
-            else if (followFlag && (AVstatus == "Flying" || AVstatus == "Flying Up" || AVstatus == "Flying Down") && !SFlagFlying) {
+            else if ((AVstatus == "Flying" || AVstatus == "Flying Up" || AVstatus == "Flying Down") && !SFlagFlying) {
                 llSensorRemove();
                 llSetStatus(STATUS_PHYSICS, FALSE);
                 llMessageLinked(LINK_SET, 200, FlyingAnims, "");
@@ -525,7 +531,7 @@ default {
                 SFlagHovering = 0;
                 SFlagRunning = 0;
             }
-            else if (followFlag && (AVstatus == "Hovering Up") && !SFlagHoveringUp) {
+            else if (AVstatus == "Hovering Up" && !SFlagHoveringUp) {
                 llSensorRemove();
                 llSetStatus(STATUS_PHYSICS, FALSE);
                 llMessageLinked(LINK_SET, 200, HoveringUpAnims, "");
@@ -537,8 +543,13 @@ default {
                 SFlagHoveringDown = 0;
                 SFlagHovering = 0;
                 SFlagRunning = 0;
+                if (gotoFlag) {
+                    gotoFlag = 0;
+                    llSensorRemove();
+                    llSetStatus(STATUS_PHYSICS, FALSE);
+                }
             }
-            else if (followFlag && (AVstatus == "Hovering Down") && !SFlagHoveringDown) {
+            else if (AVstatus == "Hovering Down" && !SFlagHoveringDown) {
                 llSensorRemove();
                 llSetStatus(STATUS_PHYSICS, FALSE);
                 llMessageLinked(LINK_SET, 200, HoveringDownAnims, "");
@@ -551,7 +562,7 @@ default {
                 SFlagHovering = 0;
                 SFlagRunning = 0;
             }
-            else if (followFlag && (AVstatus == "Hovering") && !SFlagHovering) {
+            else if (AVstatus == "Hovering" && llVecMag(AvPos-objPos) < 3 && !SFlagHovering) {
                 llSensorRemove();
                 llSetStatus(STATUS_PHYSICS, FALSE);
                 llMessageLinked(LINK_SET, 200, HoveringAnims, "");
@@ -563,8 +574,13 @@ default {
                 SFlagHoveringDown = 0;
                 SFlagHovering = 1;
                 SFlagRunning = 0;
+                if (gotoFlag) {
+                    gotoFlag = 0;
+                    llSensorRemove();
+                    llSetStatus(STATUS_PHYSICS, FALSE);
+                }
             }
-            else if (followFlag && (AVstatus == "Running") && !SFlagRunning) {
+            else if (AVstatus == "Running" && !SFlagRunning) {
                 llSensorRemove();
                 llSetStatus(STATUS_PHYSICS, FALSE);
                 llMessageLinked(LINK_SET, 200, RunningAnims, "");
