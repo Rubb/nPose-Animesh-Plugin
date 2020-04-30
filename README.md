@@ -42,7 +42,7 @@ Set the initial pose for the animesh
     `XANI_MESH|Bento_test_dummy_rezzed|body|npose-listen right`
 
 The animesh will report any new positions like a prop would except it's in an easy copy format for the animesh lines.  Reporting is turned off by default.        
-    `LINKMSG|-14002|report`
+    `XANI_MESH|report`
 
 
 You can now set up notecards to animate the animesh areas as well as setup your AV animations just like an normal nPose setup.  Just include the lines to do what's needed with the animesh prop in that same card.  An example might be as follows:        
