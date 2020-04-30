@@ -61,3 +61,5 @@ And setup the animation for the right hand.  (It is possible that some animation
 And last set up a list of animations to run in a random order running for 5 seconds each for the list.
     
 Note that this example does not set any animations for head and wings areas.  Those areas will be fixed in their default position or possibly use a previously set animation.
+
+See _**How-To**_ [Animesh as a Prop](https://github.com/nPoseTeam/nPose-V4/wiki/Animesh-as-a-Prop) for a walk thru.
