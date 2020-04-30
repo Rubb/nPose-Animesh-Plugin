@@ -12,7 +12,7 @@ The nPose Animesh Plugin can target each of these areas separately with a single
 
 For this we must use [PLUGINCOMMAND](https://github.com/nPoseTeam/nPose-V4/wiki/NC-Contents#plugincommand) to enable us to send more data than LINKMSG does.
 Always add a line in the .init as follows:    
-    `PLUGINCOMMAND|XANI_MESH|-14002`
+    `PLUGINCOMMAND|XANI_MESH|-14002`   
 There are two separate overrides within this system to set up animations.    
 The first being to run a single animation:        
     `XANI_MESH|animeshName|areaToAnimate|animationName`
