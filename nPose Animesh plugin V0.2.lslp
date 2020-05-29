@@ -203,11 +203,11 @@ move(string ObjName, vector newPos, vector NewRot) {
     if (llGetObjectName() == ObjName) {
         vector position = ParentPos + (newPos * ParentRot);
         rotation rotate = llEuler2Rot(NewRot * DEG_TO_RAD) * ParentRot;
-        llSetLinkPrimitiveParamsFast(1,
-            [
-                PRIM_POSITION, position, 
-                PRIM_ROTATION, rotate
-            ]);
+        integer rootPrim;
+        if (llGetLinkNumber() > 0) rootPrim = 1;
+        else rootPrim = 0;
+        llSetLinkPrimitiveParamsFast(rootPrim, [PRIM_ROTATION, rotate]);
+        llSetRegionPos(position);
         MyPos = llGetPos();
         MyRot = llGetRot();
     }
@@ -278,7 +278,7 @@ default {
             llStartObjectAnimation(curBodyAnim);
         }
         else if (num == moveMe) {
-            list moveParams = llParseStringKeepNulls(str, ["~"], []);
+            list moveParams = llParseStringKeepNulls(str, ["|"], []);
             move(llList2String(moveParams, 0), (vector)llList2String(moveParams, 1), (vector)llList2String(moveParams, 2));
         }
         else if(num == GETANIMDATA) {
